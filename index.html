@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Geolocation - Kelvis</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="description" content="App to get information from IPv6 or IPv4">
+</head>
+
+<body>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+
+    <main class="container">
+        <form id="ip-form">
+            <label>
+                Search any IP address
+                <input required type="text" id="ip-input" placeholder="Query IP">
+                <small>For example: 8.8.8.8 or 2001:4860:4860::8888
+                </small>
+            </label>
+            <button type="submit" id="submit-button">Search IP</button>
+        </form>
+        <div>
+            <pre id="results-pre"></pre>
+        </div>
+    </main>
+    <script type="module" src="script.js" />
+    </script>
+</body>
+
+</html>
