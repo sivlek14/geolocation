@@ -26,4 +26,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: Deploy
-        run: aws s3 sync ./ s3://kartigas-geolocation --exclude "*git*"
+        run: aws s3 sync ./ s3://kartigas-geolocation --exclude "*git*" --exclude "README.md"
