@@ -4,6 +4,8 @@ const $IPForm = $('#ip-form');
 const $IPInput = $('#ip-input');
 const $submit = $('#submit-button');
 const $results = $('#results-pre');
+const $map = $('#map');
+const $mapDiv = $('#map-div');
 
 $IPForm.addEventListener('submit', async event => {
     event.preventDefault();
@@ -22,11 +24,26 @@ $IPForm.addEventListener('submit', async event => {
     $submit.removeAttribute('disabled');
     $submit.removeAttribute('aria-busy');
 
-    if (IPInfo) {
-        $results.innerHTML = JSON.stringify(IPInfo, null, 2);
-
-        location.hash = value;
+    if (!IPInfo) {
+        return;
     }
+
+    const { location: { latitude, longitude } = {} } = IPInfo;
+
+    if (!(latitude && longitude)) {
+        $map.setAttribute('style', 'display: none;');
+        $mapDiv.setAttribute('style', 'display: none;');
+
+    }
+
+    const mapURL = `https://www.google.com/maps/embed/v1/view?key=AIzaSyDqiMQPQl35s4JU7P7Gxt3mc5CxIDOrAUw&center=${latitude},${longitude}&zoom=11&maptype=satellite`;
+
+    $map.src = mapURL;
+    $map.setAttribute('style', 'display: block;');
+    $mapDiv.setAttribute('style', 'display: block;');
+
+    $results.innerHTML = JSON.stringify(IPInfo, null, 2);
+    location.hash = value;
 });
 
 const fetchIPInfo = async ip => {
@@ -41,6 +58,11 @@ const fetchIPInfo = async ip => {
     try {
         const URL = `https://ip-geolocation-and-threat-detection.p.rapidapi.com/${ip}`;
         const responseAPI = await fetch(URL, OPTIONS);
+
+        if (!responseAPI.ok) {
+            throw new Error(responseAPI.statusText);
+        }
+
         const responseJSON = await responseAPI.json();
 
         return responseJSON;
