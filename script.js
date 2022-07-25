@@ -33,10 +33,11 @@ $IPForm.addEventListener('submit', async event => {
     if (!(latitude && longitude)) {
         $map.setAttribute('style', 'display: none;');
         $mapDiv.setAttribute('style', 'display: none;');
-
     }
 
-    const mapURL = `https://www.google.com/maps/embed/v1/view?key=AIzaSyDqiMQPQl35s4JU7P7Gxt3mc5CxIDOrAUw&center=${latitude},${longitude}&zoom=11&maptype=satellite`;
+    const googleMapsAPIKey = 'AIzaSyDqiMQPQl35s4JU7P7Gxt3mc5CxIDOrAUw';
+    const googleMapsParams = `key=${googleMapsAPIKey}&center=${latitude},${longitude}&zoom=11&maptype=satellite`;
+    const mapURL = `https://www.google.com/maps/embed/v1/view?${googleMapsParams}`;
 
     $map.src = mapURL;
     $map.setAttribute('style', 'display: block;');
