@@ -36,7 +36,7 @@ $IPForm.addEventListener('submit', async event => {
     }
 
     const googleMapsAPIKey = 'AIzaSyDqiMQPQl35s4JU7P7Gxt3mc5CxIDOrAUw';
-    const googleMapsParams = `key=${googleMapsAPIKey}&center=${latitude},${longitude}&zoom=11&maptype=satellite`;
+    const googleMapsParams = `key=${googleMapsAPIKey}&center=${latitude},${longitude}&zoom=11`;
     const mapURL = `https://www.google.com/maps/embed/v1/view?${googleMapsParams}`;
 
     $map.src = mapURL;
